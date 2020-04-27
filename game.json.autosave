@@ -308,6 +308,15 @@
         "name": "level3.png",
         "smoothed": true,
         "userAdded": true
+      },
+      {
+        "alwaysLoaded": false,
+        "file": "power-button.png",
+        "kind": "image",
+        "metadata": "",
+        "name": "power-button.png",
+        "smoothed": true,
+        "userAdded": true
       }
     ],
     "resourceFolders": []
@@ -457,8 +466,8 @@
           "locked": false,
           "name": "Ball",
           "width": 40,
-          "x": -64,
-          "y": 0,
+          "x": -288,
+          "y": -384,
           "zOrder": 5,
           "numberProperties": [],
           "stringProperties": [],
@@ -492,8 +501,8 @@
           "locked": false,
           "name": "Debug",
           "width": 0,
-          "x": 10,
-          "y": 1054,
+          "x": -288,
+          "y": -448,
           "zOrder": 7,
           "numberProperties": [],
           "stringProperties": [],
@@ -516,7 +525,7 @@
         },
         {
           "angle": 0,
-          "customSize": true,
+          "customSize": false,
           "height": 960,
           "layer": "Background",
           "locked": false,
@@ -727,8 +736,8 @@
           "locked": false,
           "name": "Player2",
           "width": 45,
-          "x": 224,
-          "y": 192,
+          "x": 288,
+          "y": 224,
           "zOrder": 34,
           "numberProperties": [],
           "stringProperties": [],
@@ -1067,7 +1076,7 @@
           "locked": false,
           "name": "Player3",
           "width": 45,
-          "x": 320,
+          "x": 224,
           "y": 288,
           "zOrder": 104,
           "numberProperties": [],
@@ -1118,6 +1127,21 @@
               "value": "3"
             }
           ]
+        },
+        {
+          "angle": 0,
+          "customSize": true,
+          "height": 64,
+          "layer": "GUI",
+          "locked": false,
+          "name": "Power",
+          "width": 64,
+          "x": 567,
+          "y": 6,
+          "zOrder": 105,
+          "numberProperties": [],
+          "stringProperties": [],
+          "initialVariables": []
         }
       ],
       "objects": [
@@ -2115,6 +2139,45 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Power",
+          "tags": "",
+          "type": "Sprite",
+          "updateIfNotVisible": false,
+          "variables": [],
+          "behaviors": [],
+          "animations": [
+            {
+              "name": "power-button",
+              "useMultipleDirections": false,
+              "directions": [
+                {
+                  "looping": false,
+                  "timeBetweenFrames": 0.08,
+                  "sprites": [
+                    {
+                      "hasCustomCollisionMask": false,
+                      "image": "power-button.png",
+                      "points": [],
+                      "originPoint": {
+                        "name": "origine",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "centerPoint": {
+                        "automatic": true,
+                        "name": "centre",
+                        "x": 0,
+                        "y": 0
+                      },
+                      "customCollisionMask": []
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ],
       "events": [
@@ -2203,6 +2266,18 @@
             {
               "type": {
                 "inverted": false,
+                "value": "Opacity"
+              },
+              "parameters": [
+                "Power",
+                "=",
+                "150"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
                 "value": "ModVarScene"
               },
               "parameters": [
@@ -2280,6 +2355,16 @@
               "parameters": [
                 "",
                 "\"ClickToStart\""
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "Cache"
+              },
+              "parameters": [
+                "Power"
               ],
               "subInstructions": []
             }
@@ -2373,6 +2458,35 @@
             {
               "disabled": false,
               "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "SystemInfo::IsMobile"
+                  },
+                  "parameters": [],
+                  "subInstructions": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "TouchSimulateMouse"
+                  },
+                  "parameters": [
+                    "",
+                    ""
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": []
+            },
+            {
+              "disabled": false,
+              "folded": false,
               "type": "BuiltinCommonInstructions::ForEach",
               "object": "GroupPlayer",
               "conditions": [],
@@ -2450,7 +2564,7 @@
         },
         {
           "disabled": false,
-          "folded": true,
+          "folded": false,
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
@@ -2474,18 +2588,6 @@
                 "",
                 "",
                 ""
-              ],
-              "subInstructions": []
-            },
-            {
-              "type": {
-                "inverted": false,
-                "value": "VarScene"
-              },
-              "parameters": [
-                "Swipe",
-                "=",
-                "0"
               ],
               "subInstructions": []
             },
@@ -2631,6 +2733,17 @@
                         "2"
                       ],
                       "subInstructions": []
+                    },
+                    {
+                      "type": {
+                        "inverted": false,
+                        "value": "StopSoundCanal"
+                      },
+                      "parameters": [
+                        "",
+                        "3"
+                      ],
+                      "subInstructions": []
                     }
                   ],
                   "events": []
@@ -2715,17 +2828,6 @@
                     {
                       "type": {
                         "inverted": false,
-                        "value": "Montre"
-                      },
-                      "parameters": [
-                        "Debug",
-                        ""
-                      ],
-                      "subInstructions": []
-                    },
-                    {
-                      "type": {
-                        "inverted": false,
                         "value": "RePlaySoundCanal"
                       },
                       "parameters": [
@@ -2759,22 +2861,22 @@
                     {
                       "type": {
                         "inverted": false,
-                        "value": "Montre"
+                        "value": "RePlaySoundCanal"
                       },
                       "parameters": [
-                        "Debug",
-                        ""
+                        "",
+                        "2"
                       ],
                       "subInstructions": []
                     },
                     {
                       "type": {
                         "inverted": false,
-                        "value": "RePlaySoundCanal"
+                        "value": "Montre"
                       },
                       "parameters": [
-                        "",
-                        "2"
+                        "Debug",
+                        ""
                       ],
                       "subInstructions": []
                     }
@@ -2784,6 +2886,223 @@
               ]
             }
           ]
+        },
+        {
+          "disabled": false,
+          "folded": false,
+          "type": "BuiltinCommonInstructions::Standard",
+          "conditions": [
+            {
+              "type": {
+                "inverted": false,
+                "value": "MouseButtonReleased"
+              },
+              "parameters": [
+                "",
+                "Left"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "SourisSurObjet"
+              },
+              "parameters": [
+                "Power",
+                "",
+                "",
+                ""
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "VarScene"
+              },
+              "parameters": [
+                "ClickToStart",
+                "=",
+                "0"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "VarScene"
+              },
+              "parameters": [
+                "Swipe",
+                "=",
+                "0"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "BuiltinCommonInstructions::Once"
+              },
+              "parameters": [],
+              "subInstructions": []
+            }
+          ],
+          "actions": [
+            {
+              "type": {
+                "inverted": false,
+                "value": "ModVarScene"
+              },
+              "parameters": [
+                "ClickToStart",
+                "=",
+                "1"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "RemoveObjectTimer"
+              },
+              "parameters": [
+                "Ball",
+                "\"DerbyTime\""
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "TextObject::String"
+              },
+              "parameters": [
+                "Timing",
+                "=",
+                "ToString(Variable(DerbyTime))"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "ModVarScene"
+              },
+              "parameters": [
+                "Level",
+                "=",
+                "1"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "ChangeAnimation"
+              },
+              "parameters": [
+                "BarraLivello",
+                "=",
+                "0"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "ShowLayer"
+              },
+              "parameters": [
+                "",
+                "\"ClickToStart\""
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "StopSoundCanal"
+              },
+              "parameters": [
+                "",
+                "2"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "StopSoundCanal"
+              },
+              "parameters": [
+                "",
+                "3"
+              ],
+              "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "Cache"
+              },
+              "parameters": [
+                "Power"
+              ],
+              "subInstructions": []
+            }
+          ],
+          "events": [
+            {
+              "disabled": false,
+              "folded": false,
+              "type": "BuiltinCommonInstructions::Standard",
+              "conditions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "VarScene"
+                  },
+                  "parameters": [
+                    "Sound",
+                    "=",
+                    "1"
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "RePlaySoundCanal"
+                  },
+                  "parameters": [
+                    "",
+                    "1"
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": []
+            }
+          ]
+        },
+        {
+          "disabled": false,
+          "folded": false,
+          "type": "BuiltinCommonInstructions::Comment",
+          "color": {
+            "b": 109,
+            "g": 230,
+            "r": 255,
+            "textB": 0,
+            "textG": 0,
+            "textR": 0
+          },
+          "comment": "Level",
+          "comment2": ""
         },
         {
           "disabled": false,
@@ -3106,6 +3425,19 @@
                 ""
               ],
               "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "SourisSurObjet"
+              },
+              "parameters": [
+                "ClickToStartText",
+                "",
+                "",
+                ""
+              ],
+              "subInstructions": []
             }
           ],
           "actions": [
@@ -3228,6 +3560,17 @@
                 "1"
               ],
               "subInstructions": []
+            },
+            {
+              "type": {
+                "inverted": false,
+                "value": "Montre"
+              },
+              "parameters": [
+                "Power",
+                ""
+              ],
+              "subInstructions": []
             }
           ],
           "events": [
@@ -3289,54 +3632,54 @@
                   "subInstructions": []
                 }
               ],
-              "events": [
+              "events": []
+            },
+            {
+              "disabled": false,
+              "folded": false,
+              "type": "BuiltinCommonInstructions::ForEach",
+              "object": "GroupPlayer",
+              "conditions": [
                 {
-                  "disabled": false,
-                  "folded": false,
-                  "type": "BuiltinCommonInstructions::Standard",
-                  "conditions": [
-                    {
-                      "type": {
-                        "inverted": false,
-                        "value": "VarObjet"
-                      },
-                      "parameters": [
-                        "GroupPlayer",
-                        "Level",
-                        ">",
-                        "Variable(Level)"
-                      ],
-                      "subInstructions": []
-                    }
+                  "type": {
+                    "inverted": false,
+                    "value": "VarObjet"
+                  },
+                  "parameters": [
+                    "GroupPlayer",
+                    "Level",
+                    ">",
+                    "Variable(Level)"
                   ],
-                  "actions": [
-                    {
-                      "type": {
-                        "inverted": false,
-                        "value": "ModVarObjet"
-                      },
-                      "parameters": [
-                        "GroupPlayer",
-                        "Enable",
-                        "=",
-                        "0"
-                      ],
-                      "subInstructions": []
-                    },
-                    {
-                      "type": {
-                        "inverted": false,
-                        "value": "Cache"
-                      },
-                      "parameters": [
-                        "GroupPlayer"
-                      ],
-                      "subInstructions": []
-                    }
-                  ],
-                  "events": []
+                  "subInstructions": []
                 }
-              ]
+              ],
+              "actions": [
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "ModVarObjet"
+                  },
+                  "parameters": [
+                    "GroupPlayer",
+                    "Enable",
+                    "=",
+                    "0"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "Cache"
+                  },
+                  "parameters": [
+                    "GroupPlayer"
+                  ],
+                  "subInstructions": []
+                }
+              ],
+              "events": []
             }
           ]
         },
@@ -4188,7 +4531,7 @@
         },
         {
           "disabled": false,
-          "folded": false,
+          "folded": true,
           "type": "BuiltinCommonInstructions::Standard",
           "conditions": [
             {
@@ -4298,13 +4641,14 @@
                 {
                   "type": {
                     "inverted": false,
-                    "value": "PlayMusic"
+                    "value": "PlaySoundCanal"
                   },
                   "parameters": [
                     "",
                     "goalOK.mp3",
-                    "",
-                    "100",
+                    "3",
+                    "no",
+                    "120",
                     "1"
                   ],
                   "subInstructions": []
@@ -4367,7 +4711,7 @@
           "colorR": 74,
           "creationTime": 0,
           "disabled": false,
-          "folded": false,
+          "folded": true,
           "name": "Opponent",
           "source": "",
           "type": "BuiltinCommonInstructions::Group",
@@ -4881,6 +5225,38 @@
                     "\"ClickToStart\""
                   ],
                   "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "StopSoundCanal"
+                  },
+                  "parameters": [
+                    "",
+                    "2"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "StopSoundCanal"
+                  },
+                  "parameters": [
+                    "",
+                    "3"
+                  ],
+                  "subInstructions": []
+                },
+                {
+                  "type": {
+                    "inverted": false,
+                    "value": "Cache"
+                  },
+                  "parameters": [
+                    "Power"
+                  ],
+                  "subInstructions": []
                 }
               ],
               "events": [
@@ -4948,7 +5324,7 @@
         },
         {
           "name": "ClickToStart",
-          "visibility": false,
+          "visibility": true,
           "cameras": [],
           "effects": []
         },
